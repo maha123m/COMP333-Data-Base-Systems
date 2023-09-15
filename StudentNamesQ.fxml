@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="404.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maha.StudentInfoQ">
+   <children>
+      <BorderPane prefHeight="401.0" prefWidth="725.0" style="-fx-background-color: #7FFFD4;">
+         <center>
+            <AnchorPane prefHeight="401.0" prefWidth="681.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="290.0" layoutY="31.0" prefHeight="17.0" prefWidth="274.0" text="Students">
+                     <font>
+                        <Font name="System Bold" size="38.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="NamesView" layoutX="28.0" layoutY="106.0" prefHeight="237.0" prefWidth="669.0">
+                    <columns>
+                      <TableColumn fx:id="FirstNameS" prefWidth="105.99999618530273" text="First Name" />
+                      <TableColumn fx:id="LastNameS" prefWidth="112.66668701171875" text="Last Name" />
+                        <TableColumn fx:id="CityS" prefWidth="91.33338928222656" text="City " />
+                        <TableColumn fx:id="StreetS" prefWidth="126.6666259765625" text="Street Name" />
+                        <TableColumn fx:id="PhoneS" prefWidth="129.3333740234375" text="Phone" />
+                        <TableColumn fx:id="WalletS" prefWidth="107.333251953125" text="Wallet" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="Home" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="629.0" layoutY="351.0" mnemonicParsing="false" onAction="#goToAdminInterface" prefHeight="36.0" prefWidth="75.0" style="-fx-background-color: #F7F7D4;" text="Home">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
