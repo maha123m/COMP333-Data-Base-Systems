@@ -4,7 +4,7 @@
 
 This project aims to develop a comprehensive database software system for a driving school based in Tulkarem called Al-Madina
 to efficiently manage their operations and their administrative tasks since they don’t have a software system and just use bunch
-of papers and pens to manage all data they have which obviously takes lots of time and efforts and sometimes ends up with lots of
+of papers and pens to manage all data they have which obviously takes lots of time and efforts and sometimes ends up with lots of 
 mistaken information and calculations.
 
 The database system will be designed to handle various aspects of the driving school's operations, including student registration,
