@@ -64,16 +64,16 @@
  ## Results
 
 <div>
-  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/a3807166-c6fb-4e58-b38c-889afec5cb7d" width="900" height="400"> 
+  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/a3807166-c6fb-4e58-b38c-889afec5cb7d" width="600" height="300"> 
   
 
-  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/4083e165-758a-4837-86fc-68c175acf2fb" width="900" height="400"> 
+  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/4083e165-758a-4837-86fc-68c175acf2fb" width="600" height="300"> 
   
 
-  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/c21a71a8-b4d3-400a-ac63-3167e711fde4" width="900" height="400">  
+  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/c21a71a8-b4d3-400a-ac63-3167e711fde4" width="600" height="300">  
   
 
-  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/67511f50-22a6-436e-88da-6c4c04b82243" width="900" height="400"> 
+  <img src ="https://github.com/maha123m/COMP333-Data-Base-Systems/assets/99613493/67511f50-22a6-436e-88da-6c4c04b82243" width="600" height="300"> 
   
    
 </div>
