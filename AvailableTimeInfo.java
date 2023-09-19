@@ -3,17 +3,15 @@ package com.example.maha;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class AvailableTimeInfo {
     private final StringProperty time;
     private final StringProperty day;
+    private final StringProperty date;
 
-    public AvailableTimeInfo(String time, String day) {
+    public AvailableTimeInfo(String time, String day, String date) {
         this.time = new SimpleStringProperty(time);
         this.day = new SimpleStringProperty(day);
+        this.date = new SimpleStringProperty(date);
     }
 
     public String getTime() {
@@ -38,5 +36,17 @@ public class AvailableTimeInfo {
 
     public void setDay(String day) {
         this.day.set(day);
+    }
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public StringProperty dateProperty() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date.set(date);
     }
 }

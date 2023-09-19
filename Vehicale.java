@@ -12,7 +12,7 @@ public class Vehicale {
     private Date licenseDate;
 
     public Vehicale (int plateNumber, int trainerID, String vehicleModel, int productionYear, String transmissionType,
-                     Date insuranceDate, Date licenseDate) {
+                   Date insuranceDate, Date licenseDate) {
         super();
         this.plateNumber = plateNumber;
         this.trainerID = trainerID;

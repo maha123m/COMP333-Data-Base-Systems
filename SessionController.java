@@ -1,14 +1,11 @@
 package com.example.maha;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,20 +16,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 
 public class SessionController implements Initializable {
     //  interface contents ------->
-
-    @FXML
-    private Button Home;
 
     @FXML
     TableView<Session> SessiontableView = new TableView<>();
@@ -40,7 +30,7 @@ public class SessionController implements Initializable {
     @FXML
     TableColumn<Session, Integer>sessionId;
     @FXML
-    TableColumn<Session, Integer> studentId;
+    TableColumn<Session, Integer> studentID ;
     @FXML
     TableColumn<Session, Integer> plateNumber ;
     @FXML
@@ -60,7 +50,45 @@ public class SessionController implements Initializable {
 
     /////////////////////////////////////////////
 
+    // Buttons:
+    @FXML
+    private Button addSession;
+    @FXML
+    private Button deleteSession;
+    @FXML
+    private Button updateSession;
+    /////////////////////////////////////////////////////////////////////////////////////
+    // textBoxes
+    @FXML
+    private TextField SessionID;
 
+    @FXML
+    private TextField StudentID;
+
+    @FXML
+    private TextField plateNumber1;
+
+    @FXML
+    private TextField TrainerID;
+    @FXML
+    private TextField SessionCost;
+    @FXML
+    private TextField SessionCompleted1;
+    @FXML
+    private TextField SessionTime1;
+
+    /////combo box
+    @FXML
+    private  ComboBox SessionDay1;
+
+    @FXML
+    private  ComboBox SessionStatus;
+
+    //date box
+    @FXML
+    private DatePicker SessionDate1;
+
+    ///////////////////////////////////////////////////////////////////////////
     ObservableList <Session> listM;
 
     int index = -1;
@@ -79,74 +107,67 @@ public class SessionController implements Initializable {
 
     public void initialize (URL url , ResourceBundle rb) {
 
+        Connecter conn = new Connecter() ;
         try {
-            Connection connectDB = new Connecter().getConnection();
-            String viewquery = "SELECT sessionId, studentID, plateNumber, trainerID, sessionCost, sessioncompleted, sessionDay, sessionTime, sessionDate, sessionStatus FROM session";
-            Statement statement = connectDB.createStatement();
-            ResultSet queryoutput = statement.executeQuery(viewquery);
-
-            // Clear the list before loading the data
-            list.clear();
+            Connection connectDB = Connecter.getConnection();
+            String viewquery = "SELECT sessionId,studentID ,plateNumber,trainerID,sessionCost,sessioncompleted,sessionDay,sessionTime,sessionDate,sessionStatus FROM session";
+            Statement statment = connectDB.createStatement();
+            ResultSet queryoutput = statment.executeQuery(viewquery);
 
             while (queryoutput.next()) {
-                Integer sessionId = queryoutput.getInt("sessionId");
-                Integer studentID = queryoutput.getInt("studentID");
-                Integer plateNumber = queryoutput.getInt("plateNumber");
-                Integer trainerID = queryoutput.getInt("trainerID");
-                Integer sessionCost = queryoutput.getInt("sessionCost");
-                Integer sessionCompleted = queryoutput.getInt("sessioncompleted");
-                String sessionDay = queryoutput.getString("sessionDay");
-                String sessionTime = queryoutput.getString("sessionTime");
-                Date sessionDate = queryoutput.getDate("sessionDate");
-                String sessionStatus = queryoutput.getString("sessionStatus");
 
-                Session session = new Session(sessionId, studentID, plateNumber, trainerID, sessionCost, sessionCompleted, sessionDay, sessionTime, sessionDate, sessionStatus);
+                Integer queryID = queryoutput.getInt("sessionId");
+                Integer Sid = queryoutput.getInt("studentID");
+                Integer pNumber = queryoutput.getInt("plateNumber");
+                Integer Tid = queryoutput.getInt("trainerID");
+                Integer sCost = queryoutput.getInt("sessionCost");
+                Integer  sComplete = queryoutput.getInt("sessioncompleted");
+                String sDay = queryoutput.getString("sessionDay");
+                String sTime = queryoutput.getString("sessionTime");
+                Date sDate = queryoutput.getDate("sessionDate");
+                String sStatus = queryoutput.getString("sessionStatus");
+
+
+               Session session = new Session(queryID, Sid,pNumber,Tid,sCost,sComplete,sDay,sTime,sDate,sStatus );
                 list.add(session);
             }
 
             sessionId.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
-            studentId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+            studentID.setCellValueFactory(new PropertyValueFactory<>("studentID"));
             plateNumber.setCellValueFactory(new PropertyValueFactory<>("plateNumber"));
             trainerID.setCellValueFactory(new PropertyValueFactory<>("trainerID"));
             sessionCost.setCellValueFactory(new PropertyValueFactory<>("sessionCost"));
-            sessioncompleted.setCellValueFactory(new PropertyValueFactory<>("sessionCompleted"));
-            sessionDay.setCellValueFactory(new PropertyValueFactory<>("sessionDay"));
-            sessionTime.setCellValueFactory(new PropertyValueFactory<>("sessionTime"));
-            sessionDate.setCellValueFactory(new PropertyValueFactory<>("sessionDate"));
-            sessionStatus.setCellValueFactory(new PropertyValueFactory<>("sessionStatus"));
-
+            sessioncompleted.setCellValueFactory(new PropertyValueFactory<>("sessioncompleted"));
+            sessionCost.setCellValueFactory(new PropertyValueFactory<>("sessionDay"));
+            sessionCost.setCellValueFactory(new PropertyValueFactory<>("sessionTime"));
+            sessionCost.setCellValueFactory(new PropertyValueFactory<>("sessionDate"));
+            sessionCost.setCellValueFactory(new PropertyValueFactory<>("sessionStatus"));
             SessiontableView.setItems(list);
 
+            // Create a filtered list to hold the filtered data
+            FilteredList<Session> filteredList = new FilteredList<>(list);
 
-            // Create a filtered list based on the original list
-            FilteredList<Session> filteredList = new FilteredList<>(list, p -> true);
-
-            // Add a change listener to the search text field
+            // Set the filter predicate for the search text field
             searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredList.setPredicate(session -> {
+                    // If the search text is empty, show all payment
                     if (newValue == null || newValue.isEmpty()) {
-                        // Show all sessions when search text is empty
                         return true;
                     }
 
-                    // Convert the search text to lowercase for case-insensitive search
-                    String searchText = newValue.toLowerCase();
+                    // Convert search text to lowercase for case-insensitive search
+                    String lowerCaseFilter = newValue.toLowerCase();
 
-                    // Check if any session attributes contain the search text
-                    return String.valueOf(session.getSessionId()).toLowerCase().contains(searchText)
-                            || String.valueOf(session.getStudentId()).toLowerCase().contains(searchText)
-                            || String.valueOf(session.getPlateNumber()).toLowerCase().contains(searchText)
-                            || String.valueOf(session.getTrainerID()).toLowerCase().contains(searchText)
-                            || String.valueOf(session.getSessionCost()).toLowerCase().contains(searchText)
-                            || String.valueOf(session.getSessionCompleted()).toLowerCase().contains(searchText)
-                            || session.getSessionDay().toLowerCase().contains(searchText)
-                            || session.getSessionTime().toLowerCase().contains(searchText)
-                            || session.getSessionDate().toString().toLowerCase().contains(searchText)
-                            || session.getSessionStatus().toLowerCase().contains(searchText);
+                    // Check if the payment's first name contains the search text
+                    if (session.getSessionStatus().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }
+
+                    return false; // Does not match the search text
                 });
             });
 
-            // Create a sorted list from the filtered list
+            // Wrap the filtered list in a sorted list to enable sorting
             SortedList<Session> sortedList = new SortedList<>(filteredList);
 
             // Bind the sorted list to the table view
@@ -154,42 +175,26 @@ public class SessionController implements Initializable {
             SessiontableView.setItems(sortedList);
 
 
-
-
-
-
         } catch (SQLException e1) {
+            // TODO Auto-generated catch block
             e1.printStackTrace();
-            Logger.getLogger(SessionController.class.getName()).log(Level.SEVERE, null, e1);
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE,null,e1);
         }
     }
 
-    ///////////////////////////////////////////////////
-    //Back Button
 
 
-    @FXML
-    private Button home;
-
-    @FXML
-    private void goToAdminInterface(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_interface.fxml"));
-            Parent root = loader.load();
-
-            Stage adminStage = new Stage();
-            adminStage.setTitle("Admin Interface");
-            adminStage.setScene(new Scene(root));
-            adminStage.show();
-
-            // Close the vehicle_interface
-            Stage vehicleStage = (Stage) home.getScene().getWindow();
-            vehicleStage.close();
 
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+
+
+
+
+
+
+
+
+
+
 
 }
