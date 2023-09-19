@@ -23,10 +23,6 @@ import java.sql.SQLException;
 
 public class SampleController {
 
-
-    // to save the id to use in the queries later on
-
-    public static int studentid;
     @FXML
     private Button CancleButton;
     @FXML
@@ -46,17 +42,15 @@ public class SampleController {
     private RadioButton StudentRadioButton;
 
     private Administration administration;
-    private   StudentRadio studentRadio ;
 
     private TrainerLogin trainer ;
 
 
-
     public SampleController() {
         administration = new Administration();
-        studentRadio = new StudentRadio();
         trainer = new TrainerLogin();
     }
+
 
     public void CancleButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) CancleButton.getScene().getWindow();
@@ -80,11 +74,6 @@ public class SampleController {
         try {
             connectDB = Connecter.getConnection();
 
-            String un= UsernameTextFiledd.getText();
-            Data data = new Data();
-            data.UName=un;
-
-
             String verifyLogin = "SELECT class FROM userAccounts WHERE Username = '"
                     + UsernameTextFiledd.getText() + "' AND passowrd = '" + PasswordFieldd.getText() + "'";
 
@@ -102,22 +91,6 @@ public class SampleController {
 
                 else if (userClass.equals("student") && StudentRadioButton.isSelected()) {
 
-                    String verifyLogin1 = "SELECT studentId FROM userAccounts WHERE Username = '"
-                            + UsernameTextFiledd.getText() + "' AND passowrd = '" + PasswordFieldd.getText() + "'";
-
-                    Statement statement1 = connectDB.createStatement();
-                    ResultSet queryResult1 = statement1.executeQuery(verifyLogin1);
-
-                    if (queryResult1.next()) {
-                        int studentID = queryResult1.getInt("studentId");
-                        studentid = studentID;
-
-
-                        System.out.println(studentID + "lanaaaa");
-
-                        studentRadio.StudentRadioButton(CancleButton, studentID);
-                    }
-
                     System.out.println("Student");
 
 
@@ -128,16 +101,14 @@ public class SampleController {
 
                     trainer.TrainerRadioButtonOnAction(CancleButton);
 
-                    System.out.println("trainer");
-
 
                 }
 
                 else {
-                    LoginMessageLabel.setText("Invalid login. Please try againnnnnn!");
+                    LoginMessageLabel.setText("Invalid login. Please try again!");
                 }
             } else {
-                LoginMessageLabel.setText("Invalid login. Please try againn!");
+                LoginMessageLabel.setText("Invalid login. Please try again!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,4 +118,8 @@ public class SampleController {
             }
         }
     }
+
+
+
+
 }

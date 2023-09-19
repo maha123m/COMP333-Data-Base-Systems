@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +33,11 @@ import javafx.stage.Stage;
 
 public class Trainercontroller implements Initializable {
 
-    List<StudentAssignment> studentAssignments = new ArrayList<>();
+
+
+
+
+
 
     //  interface contents ------->
 
@@ -63,16 +65,18 @@ public class Trainercontroller implements Initializable {
     TableColumn<Trainer, Integer> phone2;
 
 
+
+
+
+
+
     // Buttons:
     @FXML
     private Button addButton;
     @FXML
-    private Button deleteButton;
-    @FXML
     private Button updateButton;
-
     @FXML
-    private Button Home;
+    private Button deleteButton;
 
     // textBoxes
 
@@ -115,9 +119,12 @@ public class Trainercontroller implements Initializable {
     private TextField searchTextField;
 
 
+
     ObservableList<Trainer> list = FXCollections.observableArrayList();
 
     public void initialize (URL url , ResourceBundle rb) {
+
+
 
         // Event handler for selecting a row
         trainertableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -203,13 +210,6 @@ public class Trainercontroller implements Initializable {
             // Bind the sorted list to the table view
             sortedList.comparatorProperty().bind(trainertableView.comparatorProperty());
             trainertableView.setItems(sortedList);
-
-
-
-
-
-
-
         } catch (SQLException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -218,10 +218,7 @@ public class Trainercontroller implements Initializable {
     }
 
 
-
-
-
-
+    // add trainner button
     @FXML
     private void addTrainer(ActionEvent event) {
         // Get the values from the text fields
@@ -273,13 +270,6 @@ public class Trainercontroller implements Initializable {
 
                 // Add the trainer to the table view
                 list.add(trainer);
-
-                // Display a success message
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Trainer Added");
-                alert.setHeaderText("Success: Trainer Added");
-                alert.setContentText("The trainer has been added successfully.");
-                alert.showAndWait();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -289,13 +279,14 @@ public class Trainercontroller implements Initializable {
 
 
 
-    //update
+
+    // update trainner button
     @FXML
     private void updateTrainer(ActionEvent event) {
         // Check if a trainer is selected in the table
         Trainer selectedTrainer = trainertableView.getSelectionModel().getSelectedItem();
         if (selectedTrainer == null) {
-
+            //   warningLabel.setText("Warning: No trainer selected!");
             return;
         }
 
@@ -338,23 +329,13 @@ public class Trainercontroller implements Initializable {
             // Refresh the table view
             trainertableView.refresh();
 
-            // Display a success message
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Trainer Updated");
-            alert.setHeaderText("Success: Trainer Updated");
-            alert.setContentText("The trainer has been updated successfully.");
-            alert.showAndWait();
-
         } catch (SQLException e) {
             e.printStackTrace();
             Logger.getLogger(Trainercontroller.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-
-
-
-
+    // delete trainner button
     @FXML
     private void deleteTrainer(ActionEvent event) {
         // Get the trainer ID from the text field
@@ -373,42 +354,16 @@ public class Trainercontroller implements Initializable {
             // Remove the trainer from the list
             list.remove(trainerToRemove);
 
-            // Fetch the students assigned to the trainer
-            List<Integer> studentIDs = fetchStudents(trainerID);
-
             // Delete the trainer from the database
             Connecter conn = new Connecter();
             try {
                 Connection connectDB = conn.getConnection();
 
-                // Update the trainerID in the vehicle table to NULL when the trainerID doesn't exist in the trainer table
-                String updateQuery = "UPDATE vehicle SET trainerID = NULL WHERE trainerID = ?";
-                PreparedStatement statement = connectDB.prepareStatement(updateQuery);
-                statement.setInt(1, trainerID);
-                statement.executeUpdate();
-
                 // Delete the trainer from the table using the trainer ID
                 String deleteQuery = "DELETE FROM trainer WHERE trainerID = ?";
-                statement = connectDB.prepareStatement(deleteQuery);
+                PreparedStatement statement = connectDB.prepareStatement(deleteQuery);
                 statement.setInt(1, trainerID);
                 statement.executeUpdate();
-
-                // Print the students assigned to the trainer
-                System.out.println("Students assigned to Trainer with ID " + trainerID + ":");
-                for (int studentID : studentIDs) {
-                    System.out.println(studentID);
-                }
-
-                // Distribute the students to the remaining trainers
-                distributeStudents(studentIDs);
-
-                // Display a success message
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Trainer Deleted");
-                alert.setHeaderText("Success: Trainer Deleted");
-                alert.setContentText("The trainer has been deleted successfully.");
-                alert.showAndWait();
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 Logger.getLogger(Trainercontroller.class.getName()).log(Level.SEVERE, null, e);
@@ -416,159 +371,6 @@ public class Trainercontroller implements Initializable {
         } else {
             // Display a warning message if the trainer was not found
             // warningLabel.setText("Warning: Trainer not found!");
-        }
-    }
-
-
-    private List<Integer> fetchStudents(int trainerID) {
-        List<Integer> studentIDs = new ArrayList<>();
-
-        Connecter conn = new Connecter();
-        try (Connection connectDB = conn.getConnection();
-             PreparedStatement statement = connectDB.prepareStatement("SELECT studentId FROM student_trainer WHERE trainerID = ?")) {
-
-            statement.setInt(1, trainerID);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int studentID = resultSet.getInt("studentId");
-                studentIDs.add(studentID);
-            }
-
-
-
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Logger.getLogger(Trainercontroller.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return studentIDs;
-    }
-
-
-    private void distributeStudents(List<Integer> studentIDs) {
-
-        int numTrainers = list.size();
-        int numStudents = studentIDs.size();
-        int studentsPerTrainer = numStudents / numTrainers;
-        int remainingStudents = numStudents % numTrainers;
-
-        int studentIndex = 0;
-        for (Trainer trainer : list) {
-            int studentsToAssign = studentsPerTrainer;
-            if (remainingStudents > 0) {
-                studentsToAssign++;
-                remainingStudents--;
-            }
-
-            for (int i = 0; i < studentsToAssign; i++) {
-                int studentID = studentIDs.get(studentIndex);
-                assignStudentToTrainer(studentID, trainer.getTrainerID());
-
-                // Create a new StudentAssignment object with the student ID and the new trainer's name
-                StudentAssignment studentAssignment = new StudentAssignment(studentID, trainer.getTrainerFirstName(),trainer.getTrainerLastName() );
-                studentAssignments.add(studentAssignment);
-
-                Connecter conn = new Connecter();
-
-                try {
-                    Connection connectDB = conn.getConnection();
-                    Statement statement = connectDB.createStatement();
-
-                    // Check if the student ID already exists in the studentAssignment table
-                    String checkQuery = "SELECT * FROM studentAssignment WHERE studentID = " + studentID;
-                    ResultSet resultSet = statement.executeQuery(checkQuery);
-
-                    if (resultSet.next()) {
-                        // Record already exists, update it with the new trainer
-                        String updateStatement = "UPDATE studentAssignment SET newTrainerFirstName = '"
-                                + trainer.getTrainerFirstName() + "', newTrainerLastName = '"
-                                + trainer.getTrainerLastName() + "' WHERE studentID = " + studentID;
-                        statement.executeUpdate(updateStatement);
-                    } else {
-                        // Record does not exist, insert a new record
-                        String insertStatement = "INSERT INTO studentAssignment (studentID, newTrainerFirstName, newTrainerLastName) VALUES ("
-                                + studentID + ", '" + trainer.getTrainerFirstName() + "', '" + trainer.getTrainerLastName() + "')";
-                        statement.executeUpdate(insertStatement);
-                    }
-
-                    resultSet.close();
-                    statement.close();
-                    connectDB.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-                studentIndex++;
-            }
-        }
-
-        // Print the contents of the studentAssignments list
-        for (StudentAssignment assignment : studentAssignments) {
-            int assignmentStudentID = assignment.getStudentID();
-            String assignmentNewTrainerName = assignment.getNewTrainerFirstName();
-            String assignmentNewTrainerNamelast = assignment.getNewTrainerLastName();
-
-            System.out.println("Student ID: " + assignmentStudentID);
-            System.out.println("New Trainer Name: " + assignmentNewTrainerName +" " +assignmentNewTrainerNamelast);
-        }
-    }
-
-
-
-    private void assignStudentToTrainer(int studentID, int trainerID) {
-        // Update the student's trainerID in the database
-        Connecter conn = new Connecter();
-        try {
-            Connection connectDB = conn.getConnection();
-
-
-
-            // Insert a new row into the student_trainer table
-            String insertQuery = "INSERT INTO student_trainer (studentId, trainerId) VALUES (?, ?)";
-            PreparedStatement insertStatement = connectDB.prepareStatement(insertQuery);
-            insertStatement.setInt(1, studentID);
-            insertStatement.setInt(2, trainerID);
-            insertStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Logger.getLogger(Trainercontroller.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-
-
-
-
-    // Getter method for studentAssignments
-    public List<StudentAssignment> getStudentAssignments() {
-        return studentAssignments;
-    }
-
-    @FXML
-    private void goToAdminInterface(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_interface.fxml"));
-            Parent root = loader.load();
-
-            Stage adminStage = new Stage();
-            adminStage.setTitle("Admin Interface");
-            adminStage.setScene(new Scene(root));
-            adminStage.show();
-
-            // Close the vehicle_interface
-            Stage h = (Stage) Home.getScene().getWindow();
-            h.close();
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -599,3 +401,4 @@ public class Trainercontroller implements Initializable {
 
 
 
+// delete trainner button

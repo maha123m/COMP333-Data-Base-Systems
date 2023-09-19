@@ -1,7 +1,5 @@
 package com.example.maha;
 
-
-
 import java.util.Date;
 
 public class Payment {
@@ -16,7 +14,7 @@ public class Payment {
 
 
 
-    public Payment(int Pid ,int StudentId, int amount ,   String Pstatus , String Pmethood , Date payDate) {
+    public Payment(int Pid ,int StudentId, int amount , String Pmethood ,  String Pstatus, Date Pdate) {
         super();
 
         this.Pid = Pid;
@@ -24,7 +22,7 @@ public class Payment {
         this.amount = amount;
         this.Pmethood = Pmethood;
         this.Pstatus = Pstatus;
-        this.Pdate = payDate;
+        this.Pdate = Pdate;
 
     }
 
@@ -77,5 +75,4 @@ public class Payment {
     public void setPid(int pid) {
         Pid = pid;
     }
-
 }

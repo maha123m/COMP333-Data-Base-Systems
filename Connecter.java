@@ -8,14 +8,14 @@ import java.sql.SQLException;
 
 
 public class Connecter {
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/drivingschool";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/drivingschoolP";
     private static final String USERNAME = "root"; // add your sql user name
-    private static final String PASSWORD = "mahamaher1200746??"; // add your sql password
+    private static final String PASSWORD = "2001"; // add your sql password
 
     public static Connection getConnection() throws SQLException {
         try {
             // Load the MySQL JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish the connection to the database
             return DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);

@@ -1,5 +1,4 @@
 package com.example.maha;
-
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,7 @@ import java.io.IOException;
 
 public class TrainerLogin {
     @FXML
-    private Button UpcomingSessionsButton; //done
+    private Button UpcomingSessionsButton;
 
     @FXML
     private Button ContactButton;
