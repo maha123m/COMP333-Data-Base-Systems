@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1271.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maha.StudentController">
+   <children>
+      <AnchorPane fx:id="birthdate1" layoutX="-8.0" layoutY="-4.0" prefHeight="652.0" prefWidth="1274.0">
+         <children>
+            <Label layoutX="24.0" layoutY="205.0" text="Middle Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="243.0" text="Last Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="385.0" text="Phone 2:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="279.0" text="City address:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="313.0" text="Street address:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="349.0" text="Phone 1:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Mname" layoutX="165.0" layoutY="201.0" prefHeight="25.0" prefWidth="103.0" promptText="Middle Name" />
+            <TextField fx:id="lastname" layoutX="165.0" layoutY="239.0" prefHeight="25.0" prefWidth="103.0" promptText="Last Name" />
+            <TextField fx:id="cityaddress" layoutX="165.0" layoutY="275.0" prefHeight="25.0" prefWidth="103.0" promptText="City address" />
+            <TextField fx:id="phone22" layoutX="164.0" layoutY="381.0" prefHeight="25.0" prefWidth="103.0" promptText="Phone2" />
+            <TextField fx:id="streetaddress" layoutX="165.0" layoutY="309.0" prefHeight="25.0" prefWidth="103.0" promptText="Street address" />
+            <TextField fx:id="phone11" layoutX="164.0" layoutY="345.0" prefHeight="25.0" prefWidth="103.0" promptText="Phone1" />
+            <Button fx:id="updateButton" layoutX="187.0" layoutY="549.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="170.0" style="-fx-background-color: #8CE1E8;" text="UPDATE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteButton" layoutX="392.0" layoutY="550.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="168.0" style="-fx-background-color: #8CE1E8;" text="DELETE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <TableView fx:id="StudenttableView" layoutX="295.0" layoutY="119.0" prefHeight="310.0" prefWidth="954.0">
+               <columns>
+                  <TableColumn fx:id="studentId" prefWidth="73.5999755859375" text="studentId" />
+                  <TableColumn fx:id="studentFirstName" prefWidth="135.20001220703125" text="studentFirstName" />
+                  <TableColumn fx:id="studentmiddleName" prefWidth="124.0" text="studentmiddleName" />
+                  <TableColumn fx:id="studentLastName" prefWidth="101.5999755859375" text="studentLastName" />
+                  <TableColumn fx:id="cityAddress" prefWidth="64.0" text="cityAddress" />
+                  <TableColumn fx:id="streetAddress" prefWidth="88.79998779296875" text="streetAddress" />
+                  <TableColumn fx:id="phone1" minWidth="0.0" prefWidth="60.79998779296875" text="Phone1" />
+                  <TableColumn fx:id="phone2" prefWidth="117.5999755859375" text="phone2" />
+                  <TableColumn fx:id="wallet" minWidth="0.0" prefWidth="60.7999267578125" text="wallet" />
+                  <TableColumn fx:id="gender" minWidth="2.4000244140625" prefWidth="46.400146484375" text="gender" />
+                  <TableColumn fx:id="birthdate" prefWidth="75.0" text="birthdate" />
+               </columns>
+            </TableView>
+            <Button fx:id="addButton" layoutX="14.0" layoutY="550.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #8CE1E8;" text="ADD">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="searchTextField" layoutX="104.0" layoutY="79.0" prefHeight="18.0" prefWidth="998.0" />
+            <Label layoutX="28.0" layoutY="126.0" text="Student Id :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="sId" layoutX="165.0" layoutY="122.0" prefHeight="25.0" prefWidth="103.0" promptText="Student Id " />
+            <AnchorPane layoutX="-6.0" prefHeight="70.0" prefWidth="1281.0" style="-fx-background-color: #8CE1E8;">
+               <children>
+                  <ImageView fitHeight="50.0" fitWidth="69.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+
+                     </image>
+                  </ImageView>
+                  <Label layoutX="273.0" layoutY="17.0" prefHeight="30.0" prefWidth="148.0" text="Student">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="1.0" layoutY="73.0" prefHeight="38.0" prefWidth="113.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../seo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="52.0" layoutY="3.0" prefHeight="30.0" prefWidth="52.0" text="Search:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="402.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../delete-account.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="42.0" layoutX="199.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../profile.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="24.0" layoutY="169.0" text="First Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Fname" layoutX="165.0" layoutY="165.0" prefHeight="25.0" prefWidth="103.0" promptText="First Name" />
+            <Label layoutX="29.0" layoutY="465.0" text="gender">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="429.0" text="wallet">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="wallet1" layoutX="162.0" layoutY="425.0" prefHeight="25.0" prefWidth="103.0" promptText="wallet :" />
+            <Label layoutX="29.0" layoutY="500.0" text="Birthdate">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="birthdate1" layoutX="155.0" layoutY="505.0" promptText="birthdate" />
+            <ImageView fitHeight="30.0" fitWidth="42.0" layoutX="20.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../addm.png" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="gender1" layoutX="162.0" layoutY="461.0" prefWidth="150.0" promptText="gender" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

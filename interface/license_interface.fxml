@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="495.0" prefWidth="700.0" style="-fx-background-color: #F9F9EA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maha.LicenseController">
+   <children>
+      <AnchorPane layoutX="-4.0" prefHeight="59.0" prefWidth="775.0" style="-fx-background-color: #8CE1E8;">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="69.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/license.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="304.0" layoutY="15.0" prefHeight="30.0" prefWidth="158.0" text="License">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="searchTextField" layoutX="131.0" layoutY="66.0" prefHeight="22.0" prefWidth="611.0" />
+      <TextField fx:id="licenseID" layoutX="147.0" layoutY="207.0" prefHeight="26.0" prefWidth="124.0" promptText=" License ID" />
+      <Label layoutX="24.0" layoutY="209.0" prefHeight="26.0" prefWidth="91.0" text=" License ID :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="updateLicense" contentDisplay="RIGHT" layoutX="432.0" layoutY="417.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="166.0" style="-fx-background-color: #8CE1E8;" text="Update">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="addLicense" contentDisplay="RIGHT" layoutX="34.0" layoutY="417.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="166.0" style="-fx-background-color: #8CE1E8;" text="Add">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="deleteLicense" contentDisplay="RIGHT" layoutX="232.0" layoutY="417.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="166.0" style="-fx-background-color: #8CE1E8;" text="Delete">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="45.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/wallet.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="244.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/cancel.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="446.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/update%20(1).png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="studentID" layoutX="150.0" layoutY="246.0" prefHeight="26.0" prefWidth="124.0" promptText="Student ID" />
+      <Label layoutX="24.0" layoutY="293.0" prefHeight="22.0" prefWidth="91.0" text=" License Type  :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TableView fx:id="LicenseTableview" layoutX="332.0" layoutY="170.0" prefHeight="177.0" prefWidth="408.0">
+         <columns>
+            <TableColumn fx:id="licenseId" prefWidth="97.5999755859375" text="licenseId" />
+            <TableColumn fx:id="studentId" prefWidth="102.39996337890625" text="studentId" />
+            <TableColumn fx:id="licensetype" prefWidth="158.4000244140625" text="licensetype" />
+         </columns>
+      </TableView>
+      <Label layoutX="24.0" layoutY="246.0" prefHeight="26.0" prefWidth="91.0" text="Student ID :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <ChoiceBox fx:id="licenseType" layoutX="147.0" layoutY="292.0" prefWidth="150.0" />
+      <AnchorPane layoutX="16.0" layoutY="66.0" prefHeight="12.0" prefWidth="107.0">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/seo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="52.0" layoutY="3.0" prefHeight="30.0" prefWidth="52.0" text="Search:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

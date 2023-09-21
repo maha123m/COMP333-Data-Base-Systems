@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maha.EarningInfoQ">
+   <children>
+      <BorderPane layoutX="-9.0" prefHeight="400.0" prefWidth="610.0" style="-fx-background-color: #7FFFD4;" />
+      <AnchorPane prefHeight="400.0" prefWidth="601.0">
+         <children>
+            <Label layoutX="231.0" layoutY="33.0" prefHeight="34.0" prefWidth="258.0" text="Earnings" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <TableView layoutX="28.0" layoutY="145.0" prefHeight="109.0" prefWidth="546.0">
+               <columns>
+                  <TableColumn fx:id="FirstNameE" prefWidth="183.9999942779541" text="First Name " />
+                  <TableColumn fx:id="TotalSessionE" prefWidth="169.3333282470703" text="Total Session" />
+                  <TableColumn fx:id="TotalCostE" prefWidth="193.33334350585938" text="Tolat Cost " />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
